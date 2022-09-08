@@ -25,6 +25,13 @@ func NewRouter() *gin.Engine {
 		// 用户登录
 		v1.POST("user/register", api.UserRegister)
 
+		//视屏模块
+		v1.POST("videos", api.CreateVideo)
+		//v1.GET("video/:id", api.ShowVideo)
+		//v1.GET("videos", api.ListVideo)
+		//v1.PUT("video/:id", api.UpdateVideo)
+		//v1.DELETE("video/:id", api.DeleteVideo)
+
 		// 用户登录
 		v1.POST("user/login", api.UserLogin)
 
@@ -36,6 +43,7 @@ func NewRouter() *gin.Engine {
 			auth.GET("user/me", api.UserMe)
 			auth.DELETE("user/logout", api.UserLogout)
 		}
+
 	}
 	return r
 }
