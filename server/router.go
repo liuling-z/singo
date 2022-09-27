@@ -27,10 +27,10 @@ func NewRouter() *gin.Engine {
 
 		//视屏模块
 		v1.POST("videos", api.CreateVideo)
-		//v1.GET("video/:id", api.ShowVideo)
-		//v1.GET("videos", api.ListVideo)
-		//v1.PUT("video/:id", api.UpdateVideo)
-		//v1.DELETE("video/:id", api.DeleteVideo)
+		v1.GET("video/:id", api.ShowVideo)
+		v1.GET("videos", api.ListVideo)
+		v1.PUT("video/:id", api.UpdateVideo)
+		v1.DELETE("video/:id", api.DeleteVideo)
 
 		// 用户登录
 		v1.POST("user/login", api.UserLogin)
