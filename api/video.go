@@ -16,7 +16,7 @@ func CreateVideo(c *gin.Context) {
 	}
 }
 
-// ShowVideo 视频详情
+// ShowVideo 视频详情查询
 func ShowVideo(c *gin.Context) {
 	service := service.ShowVideoService{}
 	if err := c.ShouldBind(&service); err == nil {
@@ -27,7 +27,7 @@ func ShowVideo(c *gin.Context) {
 	}
 }
 
-// UpdateVideo 视频信息更新
+// UpdateVideo 更新视频信息
 func UpdateVideo(c *gin.Context) {
 	service := service.UpdateVideoService{}
 	if err := c.ShouldBind(&service); err == nil {

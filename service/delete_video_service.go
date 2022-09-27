@@ -9,8 +9,6 @@ import (
 
 // DeleteVideoService 删除视频信息接口
 type DeleteVideoService struct {
-	Title string `form:"title" json:"title" binding:"required,min=2,max=30"`
-	Info  string `form:"info" json:"info" binding:"min=0,max=300"`
 }
 
 // setSession 设置session
@@ -23,10 +21,7 @@ func (service *DeleteVideoService) setSession(c *gin.Context, user model.User) {
 
 // Delete 删除视频信息
 func (service *DeleteVideoService) Delete(id string) serializer.Response {
-	video := model.Video{
-		Title: service.Title,
-		Info:  service.Info,
-	}
+	var video model.Video
 	err := model.DB.Where("id=?", id).Delete(&video).Error
 	if err != nil {
 		return serializer.Response{

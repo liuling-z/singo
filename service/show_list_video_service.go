@@ -21,8 +21,8 @@ func (service *ListVideoService) setSession(c *gin.Context, user model.User) {
 
 // ShowList 视频列表
 func (service *ListVideoService) ShowList() serializer.Response {
-	var video model.Video
-	err := model.DB.Limit(10).Find(&video).Error
+	var videos []model.Video
+	err := model.DB.Find(&videos).Error
 	if err != nil {
 		return serializer.Response{
 			Code:  404,
@@ -31,5 +31,5 @@ func (service *ListVideoService) ShowList() serializer.Response {
 			Error: err.Error(),
 		}
 	}
-	return serializer.Response{Data: serializer.BuildVideo(video)}
+	return serializer.Response{Data: serializer.BuildVideos(videos)}
 }

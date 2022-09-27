@@ -23,11 +23,19 @@ func (service *UpdateVideoService) setSession(c *gin.Context, user model.User) {
 
 // Update 更新视频信息
 func (service *UpdateVideoService) Update(id string) serializer.Response {
-	video := model.Video{
-		Title: service.Title,
-		Info:  service.Info,
+	var video model.Video
+	err := model.DB.First(&video, id).Error
+	if err != nil {
+		return serializer.Response{
+			Code:  404,
+			Data:  nil,
+			Msg:   "视频列表查询失败",
+			Error: err.Error(),
+		}
 	}
-	err := model.DB.Model(&video).Update("id", id).Error
+	video.Title = service.Title
+	video.Info = service.Info
+	err = model.DB.Save(&video).Error
 	if err != nil {
 		return serializer.Response{
 			Code:  500,
