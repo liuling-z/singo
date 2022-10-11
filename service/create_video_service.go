@@ -32,7 +32,7 @@ func (service *CreateVideoService) Create() serializer.Response {
 		return serializer.Response{
 			Code:  500,
 			Data:  nil,
-			Msg:   "视频报错失败",
+			Msg:   "视频创建失败",
 			Error: err.Error(),
 		}
 	}

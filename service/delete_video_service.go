@@ -22,7 +22,16 @@ func (service *DeleteVideoService) setSession(c *gin.Context, user model.User) {
 // Delete 删除视频信息
 func (service *DeleteVideoService) Delete(id string) serializer.Response {
 	var video model.Video
-	err := model.DB.Where("id=?", id).Delete(&video).Error
+	err := model.DB.First(&video, id).Error
+	if err != nil {
+		return serializer.Response{
+			Code:  404,
+			Data:  nil,
+			Msg:   "视频不存在",
+			Error: err.Error(),
+		}
+	}
+	err = model.DB.Where("id=?", id).Delete(&video).Error
 	if err != nil {
 		return serializer.Response{
 			Code:  500,

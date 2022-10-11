@@ -27,7 +27,7 @@ func (service *ShowVideoService) Show(id string) serializer.Response {
 		return serializer.Response{
 			Code:  404,
 			Data:  nil,
-			Msg:   "视频查询失败",
+			Msg:   "视频不存在",
 			Error: err.Error(),
 		}
 	}
