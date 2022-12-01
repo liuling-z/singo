@@ -10,6 +10,15 @@ type Video struct {
 	CreatedAt int64  `json:"created_at"`
 }
 
+// File 文件序列化器
+type File struct {
+	ID        uint   `json:"id"`
+	Title     string `json:"title"`
+	Info      string `json:"info"`
+	Src       string `json:"src"`
+	CreatedAt int64  `json:"created_at"`
+}
+
 // BuildVideo 序列化视频
 func BuildVideo(item model.Video) Video {
 	return Video{
@@ -27,4 +36,15 @@ func BuildVideos(items []model.Video) (videos []Video) {
 		videos = append(videos, video)
 	}
 	return videos
+}
+
+// BuildFile 序列化文件
+func BuildFile(item model.File) File {
+	return File{
+		ID:        item.ID,
+		Title:     item.Title,
+		Info:      item.Info,
+		Src:       item.Src,
+		CreatedAt: item.CreatedAt.Unix(),
+	}
 }

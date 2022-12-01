@@ -27,6 +27,7 @@ func NewRouter() *gin.Engine {
 
 		// 用户登录
 		v1.POST("user/login", api.UserLogin)
+		v1.POST("file/load", api.LoadFile)
 
 		// 需要登录保护的
 		auth := v1.Group("")
@@ -36,12 +37,13 @@ func NewRouter() *gin.Engine {
 			auth.GET("user/me", api.UserMe)
 			auth.DELETE("user/logout", api.UserLogout)
 			//视频模块
-			auth.POST("videos", api.CreateVideo)
-			auth.GET("video/:id", api.ShowVideo)
+
 			auth.GET("videos", api.ListVideo)
-			auth.PUT("video/:id", api.UpdateVideo)
 			auth.DELETE("video/:id", api.DeleteVideo)
 		}
+		v1.GET("video/:id", api.ShowVideo)
+		v1.PUT("video/:id", api.UpdateVideo)
+		v1.POST("videos", api.CreateVideo)
 	}
 	return r
 }

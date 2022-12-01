@@ -22,6 +22,8 @@ func ShowVideo(c *gin.Context) {
 	if err := c.ShouldBind(&service); err == nil {
 		res := service.Show(c.Param("id"))
 		c.JSON(200, res)
+		//string := `{"title": "标题","info": "详细信息"}`
+
 	} else {
 		c.JSON(200, ErrorResponse(err))
 	}
